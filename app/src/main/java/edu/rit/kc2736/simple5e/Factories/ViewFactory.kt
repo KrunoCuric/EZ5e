@@ -2,6 +2,10 @@ package edu.rit.kc2736.simple5e.Factories
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
+import androidx.compose.material.icons.outlined.AccountCircle
+import androidx.compose.material.icons.outlined.AddCircle
+import androidx.compose.material.icons.outlined.Face
+import androidx.compose.material.icons.outlined.Person
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.lifecycle.ViewModel
@@ -13,11 +17,11 @@ import edu.rit.kc2736.simple5e.Views.SpellListView
 sealed class Screen(val route: String, val label: String, val icon: ImageVector) {
 //    object Main : Screen("main", "Main Menu", Icons.Default.Home)
 //    object Spells : Screen("spells", "Spell list", Icons.Default.Call)
-    object Characters : Screen("characters", "Characters", Icons.Default.Person)
-    object Dice : Screen("spells", "Dice", Icons.Default.AccountBox)
-    object NewCharacter : Screen("main", "New Character", Icons.Default.AddCircle)
-    object Class : Screen("class", "Class", Icons.Default.Home)
-    object Race : Screen("race", "Race", Icons.Default.Face)
+    object Characters : Screen("main", "Chars", Icons.Outlined.AccountCircle)
+    object Dice : Screen("spells", "Dice", Icons.Filled.KeyboardArrowUp)
+    object NewCharacter : Screen("new_character", "", Icons.Outlined.AddCircle)
+    object Class : Screen("class", "Class", Icons.Outlined.Face)
+    object Race : Screen("race", "Race", Icons.Outlined.Person)
     //Gets a array of all objects declared above this
     companion object {
         fun values(): Array<Screen> {

@@ -14,7 +14,9 @@ import edu.rit.kc2736.simple5e.ViewModels.SpellListViewModel
 
 @Composable
 fun SpellListView(viewModel: SpellListViewModel){
+
     val stateTitle by viewModel.mutableTitle
+
     Column(modifier = Modifier.fillMaxWidth()) {
         Row(modifier = Modifier.fillMaxWidth()) {
             Text(textAlign = TextAlign.Center, text = stateTitle)
