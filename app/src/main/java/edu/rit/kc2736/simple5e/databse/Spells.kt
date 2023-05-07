@@ -2,10 +2,10 @@ package edu.rit.kc2736.simple5e.databse
 
 data class Spells(
     var count: Int,
-    var results: List<Spell>
+    var results: List<ApiReference>
 )
 
-data class Spell(
+data class ApiReference(
     var index: String,
     var name: String,
     var url: String

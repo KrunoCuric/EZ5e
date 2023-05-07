@@ -18,10 +18,9 @@ import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.icons.Icons
-
 import androidx.compose.material.Text
 import androidx.compose.material.icons.filled.ArrowForward
-import androidx.compose.material.icons.filled.MenuBook
+import androidx.compose.material.icons.filled.FactCheck
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
@@ -32,17 +31,16 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import edu.rit.kc2736.simple5e.Factories.Screen
 import edu.rit.kc2736.simple5e.ViewModels.FeatureListViewModel
-import edu.rit.kc2736.simple5e.ViewModels.SpellListViewModel
 
 @Composable
-fun SpellListView(viewModel: SpellListViewModel, navController: NavController){
+fun FeatureListView(viewModel: FeatureListViewModel, navController: NavController){
     LaunchedEffect(Unit, block = {
-        viewModel.getSpellList()
+        viewModel.getFeatureList()
     })
     Column(modifier = Modifier.fillMaxWidth()) {
         Box(Modifier.fillMaxWidth()) {
             Text(
-                text = "Spells",
+                text = "Features",
                 style = MaterialTheme.typography.h4,
                 modifier = Modifier
                     .padding(16.dp)
@@ -50,13 +48,13 @@ fun SpellListView(viewModel: SpellListViewModel, navController: NavController){
             )
         }
         LazyColumn(modifier = Modifier.fillMaxSize()) {
-            items(items = viewModel.apiReferenceList) { spell ->
+            items(items = viewModel.featureList) { feature ->
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(vertical = 8.dp, horizontal = 16.dp)
                         .clickable(onClick = {
-                            val route = Screen.SpellDetail.route.replace("{spellId}", spell.index)
+                            val route = Screen.FeatureDetail.route.replace("{featureId}", feature.index)
                             navController.navigate(route)
                         })
                         .shadow(2.dp)
@@ -72,14 +70,14 @@ fun SpellListView(viewModel: SpellListViewModel, navController: NavController){
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Icon(
-                                Icons.Filled.MenuBook,
-                                contentDescription = "magic",
+                                Icons.Filled.FactCheck,
+                                contentDescription = "feature",
                                 tint = Color.Yellow,
                                 modifier = Modifier.size(24.dp)
                             )
                             Spacer(Modifier.width(16.dp))
                             Text(
-                                text = spell.name,
+                                text = feature.name,
                                 style = MaterialTheme.typography.h6,
                                 color = MaterialTheme.colors.onSurface
                             )

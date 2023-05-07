@@ -9,42 +9,38 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import edu.rit.kc2736.simple5e.api.APIService
 import edu.rit.kc2736.simple5e.databse.ApiReference
-import edu.rit.kc2736.simple5e.databse.SpellDetail
+import edu.rit.kc2736.simple5e.databse.Feature
 import kotlinx.coroutines.launch
 
-class SpellListViewModel: ViewModel() {
-    private val _apiReferenceList = mutableStateListOf<ApiReference>()
+class FeatureListViewModel: ViewModel() {
+    private val _featureList = mutableStateListOf<ApiReference>()
 
     var errorMessage: String by mutableStateOf("")
-    val apiReferenceList: List<ApiReference>
-        get() = _apiReferenceList
+    val featureList: List<ApiReference>
+        get() = _featureList
 
-    var spellDetail: MutableState<SpellDetail?> = mutableStateOf(null)
-//    val spellDetail: LiveData<SpellDetail> = _spellDetail
-    fun getSpellList() {
+    var featureDetail: MutableState<Feature?> = mutableStateOf(null)
+    fun getFeatureList() {
         viewModelScope.launch {
             val apiService = APIService.getInstance()
             try {
-                _apiReferenceList.clear()
-                _apiReferenceList.addAll(apiService.getSpells().results)
+                _featureList.clear()
+                _featureList.addAll(apiService.getFeatures().results)
             } catch (e: Exception) {
                 errorMessage = e.message.toString()
             }
         }
     }
 
-    fun getSpellDetail(index: String) {
+    fun getFeatureDetail(index: String) {
         viewModelScope.launch {
             val apiService = APIService.getInstance()
             try {
-                val spellDetails = apiService.getSpell(index)
-                spellDetail.value = spellDetails
+                val data = apiService.getFeature(index)
+                featureDetail.value = data
             } catch (e: Exception) {
                 errorMessage = e.message.toString()
             }
         }
     }
-
-
-
 }

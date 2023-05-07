@@ -1,5 +1,7 @@
 package edu.rit.kc2736.simple5e.api
 
+import edu.rit.kc2736.simple5e.databse.Feature
+import edu.rit.kc2736.simple5e.databse.Features
 import edu.rit.kc2736.simple5e.databse.SpellDetail
 import edu.rit.kc2736.simple5e.databse.Spells
 import retrofit2.Retrofit
@@ -13,8 +15,14 @@ interface APIService {
     @GET("api/spells")
     suspend fun getSpells(): Spells
 
-    @GET("/spells/{index}")
+    @GET("api/spells/{index}")
     suspend fun getSpell(@Path("index") index: String): SpellDetail
+
+    @GET("api/features")
+    suspend fun getFeatures(): Features
+
+    @GET("api/features/{index}")
+    suspend fun getFeature(@Path("index") index: String): Feature
 
     companion object {
         var apiService: APIService? = null

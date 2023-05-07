@@ -53,6 +53,7 @@ private val DarkThemeColors = darkColors(
 
 )
 
+
 @Composable
 fun EZ5eTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
     val colors = if (darkTheme) {
@@ -81,9 +82,15 @@ fun EZ5eDarkTheme(
     darkTheme: Boolean,
     content: @Composable () -> Unit,
 ) {
+    val CustomTypography = Typography.copy(
+        h4 = MaterialTheme.typography.h4.copy(fontSize = MaterialTheme.typography.h4.fontSize * 1.25),
+        h6 = MaterialTheme.typography.h6.copy(fontSize = MaterialTheme.typography.h6.fontSize * 1.25),
+        body1 = MaterialTheme.typography.body1.copy(fontSize = MaterialTheme.typography.body1.fontSize * 1.25),
+        body2 = MaterialTheme.typography.body2.copy(fontSize = MaterialTheme.typography.body2.fontSize * 1.25),
+    )
     MaterialTheme(
         colors = if (darkTheme) DarkThemeColors else LightThemeColors,
-        typography = Typography,
+        typography = CustomTypography,
         shapes = Shapes,
         content= content
     )

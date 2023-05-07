@@ -55,6 +55,8 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:4.10.0'
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
+    implementation "androidx.compose.runtime:runtime-livedata:<compose_version>"
+
     /*
      * Gradle had trouble using this implementation and the updated version of kotlin
      * Issue is present because the version of kotlin used in development now has this by default
