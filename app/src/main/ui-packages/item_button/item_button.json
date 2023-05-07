@@ -1,0 +1,186 @@
+{
+  "name": "item_button",
+  "version": 32,
+  "source-key": {
+    "type": "figma",
+    "file": "Ahe6kj7LmdAKDlduC7MtW8",
+    "node": "2:272",
+    "version": "3449692755",
+    "component-id": "848a71d83cd3682404d2a412bef913acef06929c"
+  },
+  "default": "ItemButton",
+  "design": {
+    "atoms": [
+      {
+        "type": "group",
+        "id": "top_level",
+        "root": "true"
+      },
+      {
+        "type": "group",
+        "id": "magic_button"
+      },
+      {
+        "type": "text",
+        "id": "text"
+      }
+    ],
+    "modes": {
+      "ItemButton": {
+        "rules": [
+          {
+            "id": "top_level",
+            "padding": {
+              "left": "16.0",
+              "top": "20.0",
+              "right": "16.0",
+              "bottom": "20.0"
+            },
+            "border-radius": "16.0",
+            "drop-shadow": {
+              "color": {
+                "alpha": "0.24705882352941178",
+                "hue": "0.0",
+                "saturation": "0.0",
+                "value": "0.0"
+              },
+              "blur": "4.0",
+              "offset-x": "0.0",
+              "offset-y": "4.0",
+              "spread": "0.0",
+              "blend-mode": "normal"
+            },
+            "tap-handler": "$onClick",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "shrink"
+              },
+              "height-constraints": {
+                "sizing-mode": "shrink"
+              }
+            },
+            "arrangement": "row",
+            "children": [
+              "magic_button",
+              "text"
+            ],
+            "background-color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "0.8509803921568627"
+            }
+          },
+          {
+            "id": "magic_button",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "42.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "42.0"
+              }
+            },
+            "is-structured": "false",
+            "children": "$icon",
+            "clip-content": "false"
+          },
+          {
+            "id": "text",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "250.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "shrink"
+              }
+            },
+            "color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "0.0"
+            },
+            "text-content": "$text",
+            "overflow": "visible",
+            "max-lines": "-1",
+            "text-align-vertical": "center",
+            "text-size": "16.0",
+            "line-height": "1.2102272510528564",
+            "typeface": "Inter"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "onClick": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": "Handle tap action"
+    },
+    "icon": {
+      "data-type": "list-item",
+      "required": false,
+      "description": "Icon shown before text"
+    },
+    "text": {
+      "data-type": "text",
+      "required": false,
+      "description": "Display name on the button"
+    }
+  },
+  "previews": [
+    {
+      "design": "ItemButton",
+      "size": {
+        "width": 324.0,
+        "height": 82.0
+      },
+      "parameters": {
+        "icon": [
+          {
+            "type": "vector",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": 1.0
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": 1.0
+              }
+            }
+          },
+          {
+            "type": "vector",
+            "margin": {
+              "left": "4.375",
+              "top": "6.037506103515625",
+              "right": "4.375",
+              "bottom": "6.037506103515625"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": 1.0
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": 1.0
+              }
+            },
+            "vector-content": "magic_button.svg"
+          }
+        ],
+        "text": "Acid Throw"
+      }
+    }
+  ],
+  "adin-component-search-paths": [],
+  "image-search-paths": [],
+  "vector-search-paths": []
+}

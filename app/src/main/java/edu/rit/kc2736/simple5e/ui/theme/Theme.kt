@@ -59,6 +59,7 @@ fun EZ5eTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable (
         DarkColorPalette
     } else {
         LightColorPalette
+        //DarkThemeColors
     }
 
     MaterialTheme(
@@ -82,6 +83,8 @@ fun EZ5eDarkTheme(
 ) {
     MaterialTheme(
         colors = if (darkTheme) DarkThemeColors else LightThemeColors,
+        typography = Typography,
+        shapes = Shapes,
         content= content
     )
 }

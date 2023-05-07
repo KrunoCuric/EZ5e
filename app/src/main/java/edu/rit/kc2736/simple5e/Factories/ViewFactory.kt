@@ -4,6 +4,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.material.icons.outlined.AddCircle
+import androidx.compose.material.icons.outlined.Book
 import androidx.compose.material.icons.outlined.Face
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.runtime.Composable
@@ -12,16 +13,16 @@ import androidx.lifecycle.ViewModel
 import edu.rit.kc2736.simple5e.ViewModels.MainViewModel
 import edu.rit.kc2736.simple5e.ViewModels.SpellListViewModel
 import edu.rit.kc2736.simple5e.Views.MainView
+import edu.rit.kc2736.simple5e.Views.SpellDetailView
 import edu.rit.kc2736.simple5e.Views.SpellListView
 
 sealed class Screen(val route: String, val label: String, val icon: ImageVector) {
-//    object Main : Screen("main", "Main Menu", Icons.Default.Home)
-//    object Spells : Screen("spells", "Spell list", Icons.Default.Call)
-    object Characters : Screen("main", "Chars", Icons.Outlined.AccountCircle)
-    object Dice : Screen("spells", "Dice", Icons.Filled.KeyboardArrowUp)
+    object Characters : Screen("characters", "Chars", Icons.Outlined.AccountCircle)
+    object Dice : Screen("dice", "Dice", Icons.Filled.Casino)
     object NewCharacter : Screen("new_character", "", Icons.Outlined.AddCircle)
-    object Class : Screen("class", "Class", Icons.Outlined.Face)
+    object Spells : Screen("spells", "Spells", Icons.Outlined.Book)
     object Race : Screen("race", "Race", Icons.Outlined.Person)
+    object SpellDetail: Screen("spellDetail", "Spell details", Icons.Outlined.Face)
     //Gets a array of all objects declared above this
     companion object {
         fun values(): Array<Screen> {
@@ -33,7 +34,7 @@ sealed class Screen(val route: String, val label: String, val icon: ImageVector)
                 Screen.Characters,
                 Screen.Dice,
                 Screen.NewCharacter,
-                Screen.Class,
+                Screen.Spells,
                 Screen.Race
             )
         }
@@ -53,17 +54,21 @@ object ViewFactory {
     }
 
     @Composable
-    fun create(screen: Screen) {
+    fun create(screen: Screen, navController: androidx.navigation.NavController) {
         when (screen.route) {
             /*TAG => MainView*/
-            "main" -> {
+            "characters" -> {
                 val viewModel = getOrCreateViewModel(MainViewModel::class.java)
                 MainView(viewModel)
             }
             /*TAG => SpellListView*/
             "spells" -> {
                 val viewModel = getOrCreateViewModel(SpellListViewModel::class.java)
-                SpellListView(viewModel)
+                SpellListView(viewModel, navController)
+            }
+            "spellDetail" -> {
+                val viewModel = getOrCreateViewModel(SpellListViewModel::class.java)
+                SpellDetailView(viewModel, navController)
             }
         }
     }
