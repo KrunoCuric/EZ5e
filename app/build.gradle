@@ -56,6 +56,8 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
     implementation "androidx.compose.runtime:runtime-livedata:<compose_version>"
+    implementation 'com.google.code.gson:gson:2.8.9'
+
 
     /*
      * Gradle had trouble using this implementation and the updated version of kotlin

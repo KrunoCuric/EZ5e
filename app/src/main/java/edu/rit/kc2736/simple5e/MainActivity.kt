@@ -20,13 +20,17 @@ import androidx.navigation.navArgument
 import edu.rit.kc2736.simple5e.Factories.Screen
 import edu.rit.kc2736.simple5e.Factories.ViewFactory
 import edu.rit.kc2736.simple5e.Views.Components.BottomNavigationBar
+import edu.rit.kc2736.simple5e.databse.createInitialCharModelFile
 import edu.rit.kc2736.simple5e.ui.theme.EZ5eDarkTheme
+import java.net.URLDecoder
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             ContentWrapper()
         }
+        createInitialCharModelFile(this)
     }
 }
 
@@ -76,6 +80,19 @@ fun BackgroundImageBox(navController: NavHostController, scaffoldState: Scaffold
                         )
                     }
                 }
+                composable(Screen.CharacterDetail.route, listOf(navArgument("charJson") { type = NavType.StringType })) {backStackEntry ->
+                    val charJson = backStackEntry.arguments?.getString("charJson")
+                    if (charJson != null) {
+                            val decodedFilePath = charJson.let { path -> URLDecoder.decode(path, "UTF-8")}
+                            ViewFactory.create(
+                            screen = Screen.CharacterDetail,
+                            navController = navController,
+                            index = decodedFilePath
+                        )
+                    }
+                }
+//                composable(Screen.Characters.route) { ViewFactory.create(screen = Screen.Characters, navController = navController) }
+//                composable(Screen.NewCharacter.route) { ViewFactory.create(screen = Screen.NewCharacter, navController = navController) }
             }
         }
     }

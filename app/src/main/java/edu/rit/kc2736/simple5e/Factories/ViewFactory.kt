@@ -1,21 +1,27 @@
 package edu.rit.kc2736.simple5e.Factories
 
+import android.content.Context
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.material.icons.outlined.AddCircle
 import androidx.compose.material.icons.outlined.Book
+import androidx.compose.material.icons.outlined.Face
 import androidx.compose.material.icons.outlined.FactCheck
-import androidx.compose.material.icons.outlined.Person
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import edu.rit.kc2736.simple5e.ViewModels.CharacterViewModel
 import edu.rit.kc2736.simple5e.ViewModels.FeatureListViewModel
 import edu.rit.kc2736.simple5e.ViewModels.MainViewModel
 import edu.rit.kc2736.simple5e.ViewModels.SpellListViewModel
+import edu.rit.kc2736.simple5e.Views.CharacterListView
+import edu.rit.kc2736.simple5e.Views.CharacterView
 import edu.rit.kc2736.simple5e.Views.FeatureDetailView
 import edu.rit.kc2736.simple5e.Views.FeatureListView
 import edu.rit.kc2736.simple5e.Views.MainView
+import edu.rit.kc2736.simple5e.Views.NewCharacterView
 import edu.rit.kc2736.simple5e.Views.SpellDetailView
 import edu.rit.kc2736.simple5e.Views.SpellListView
 
@@ -27,6 +33,7 @@ sealed class Screen(val route: String, val label: String, val icon: ImageVector)
     object Features : Screen("features", "Features", Icons.Outlined.FactCheck)
     object SpellDetail: Screen("spellDetail/{spellId}", "Spell details", Icons.Outlined.Book)
     object FeatureDetail: Screen("featureDetail/{featureId}", "Feature details", Icons.Outlined.FactCheck)
+    object CharacterDetail: Screen("characterDetail/{charJson}", "Character details", Icons.Outlined.Face)
     //Gets a array of all objects declared above this
     companion object {
         fun values(): Array<Screen> {
@@ -60,10 +67,13 @@ object ViewFactory {
     @Composable
     fun create(screen: Screen, navController: androidx.navigation.NavController, index:String = "") {
         when (screen.route) {
-            /*TAG => MainView*/
+            /*TAG => CharacterListView*/
             "characters" -> {
-                val viewModel = getOrCreateViewModel(MainViewModel::class.java)
-                MainView(viewModel)
+                CharacterListView(navController)
+            }
+            /*TAG => CharacterView*/
+            "characterDetail/{charJson}" -> {
+                CharacterView(navController, index)
             }
             /*TAG => SpellListView*/
             "spells" -> {
@@ -74,6 +84,10 @@ object ViewFactory {
             "features" -> {
                 val viewModel = getOrCreateViewModel(FeatureListViewModel::class.java)
                 FeatureListView(viewModel, navController)
+            }
+            /*TAG => NewCharacterView*/
+            "new_character" -> {
+                NewCharacterView(navController)
             }
             /*TAG => SpellDetailView*/
             "spellDetail/{spellId}" -> {
@@ -86,5 +100,14 @@ object ViewFactory {
                 FeatureDetailView(viewModel, navController, index)
             }
         }
+    }
+}
+class CharacterViewModelFactory(private val context: Context) : ViewModelProvider.Factory {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        if (modelClass.isAssignableFrom(CharacterViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
+            return CharacterViewModel(context) as T
+        }
+        throw IllegalArgumentException("Unknown ViewModel class")
     }
 }
